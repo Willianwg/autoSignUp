@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/readline-sync": "^1.4.4",
+    "readline-sync": "^1.4.10"
+  }
 }
