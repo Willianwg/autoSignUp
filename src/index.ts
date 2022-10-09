@@ -1,14 +1,12 @@
-const readline = require ('readline-sync');
+import readline from 'readline-sync';
 
-async function machine(){
-
+async function machine():Promise<void>{
     await askUser();
 
 }
 
-async function askUser(){
-    const userResponse = await readline.question("what do you think? ")
-    console.log(userResponse);
+async function askUser(): Promise<void>{
+    const userResponse : string = await readline.question("what do you think? ");
 
 }
 
