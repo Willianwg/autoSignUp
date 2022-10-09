@@ -20,7 +20,7 @@ async function Pup() {
      // Do stuff
      const url = 'https://pt-br.facebook.com/';
      await page.goto(url);
-
+    
      const result = await page.evaluate(
          () => document.querySelector('._8eso').textContent 
      )
