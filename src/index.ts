@@ -7,7 +7,7 @@ async function machine():Promise<void>{
 
 async function askUser(): Promise<void>{
     const userResponse : string = await readline.question("what do you think? ");
-
+    console.log(userResponse);
 }
 
 machine();
