@@ -1,32 +1,28 @@
-import readline from 'readline-sync';
 import puppeteer from 'puppeteer';
+import { FirstForm } from './createAccount/createAccount';
 
-async function machine():Promise<void>{
-    await askUser();
+async function execute():Promise<void>{
     await Pup();
 }
 
-async function askUser(): Promise<void>{
-    const userResponse : string = await readline.question("what do you think? ");
-    console.log(userResponse);
-}
-
 async function Pup() {
-     const browser = await puppeteer.launch();
+     const browser = await puppeteer.launch({ headless:false });
      // Create a new incognito browser context.
      const context = await browser.createIncognitoBrowserContext();
      // Create a new page in a pristine context.
      const page = await context.newPage();
      // Do stuff
-     const url = 'https://pt-br.facebook.com/';
+     const url = 'https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp';
      await page.goto(url);
-    
-     const result = await page.evaluate(
-         () => document.querySelector('._8eso').textContent 
-     )
 
-    console.log(result);
-    browser.close();
+     const form = new FirstForm(page);
+    
+     await form.setFirstName();
+     await form.setLastName();
+     await form.setEmail();
+     await form.setPassword();
+     await form.advance();
+
    };
 
-machine();
+execute();
