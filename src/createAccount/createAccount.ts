@@ -6,26 +6,29 @@ export class FirstForm {
 
     }
 
-    async setFirstName(){
+    async setFirstName(username){
         await this.page.evaluate(
-            ()=> document.querySelector('input#firstName').setAttribute('value','Willian')
+            (val) => (<HTMLInputElement>document.querySelector('input#firstName')).value = val, 
+            username
         ); 
     }
 
-    async setLastName(){
+    async setLastName(username){
         await this.page.evaluate(
-            ()=>document.querySelector('input#lastName').setAttribute('value', 'Guedes')
-        );
+            (val) => (<HTMLInputElement>document.querySelector('input#lastName')).value = val, 
+            username
+        ); 
     }
 
-    async setEmail(){
+    async setEmail(username){
+        const randomNumber = Math.random().toFixed(6);
+        const userEmail = username + randomNumber;
+
         const email = await this.page.evaluate(
-            ()=>{
-                const randomNumber = Math.random().toFixed(6);
-                const userEmail = 'Guedes'+ randomNumber;
-                document.querySelector('input#username').setAttribute('value', userEmail);
-                return userEmail;
-            }    
+            (val)=>{
+                const input  = (<HTMLInputElement>document.querySelector('input#username')).value = val;
+                return input;
+            }, userEmail
         );
 
         console.log('Email: '+ email + '@gmail.com');
